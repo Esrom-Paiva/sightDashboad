@@ -24,9 +24,15 @@
               "src/assets"
             ],
             "styles": [
+              "../sightDashboard-app/node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [
+              "../sightDashboard-app/node_modules/jquery/dist/jquery.min.js",
+              "../sightDashboard-app/node_modules/popper.js/dist/umd/popper.min.js",
+              "../sightDashboard-app/node_modules/bootstrap/dist/js/bootstrap.min.js",
+              "../sightDashboard-app/node_modules/chart.js/dist/chart.min.js"
+            ]
           },
           "configurations": {
             "production": {
