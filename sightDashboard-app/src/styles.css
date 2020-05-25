@@ -11,14 +11,36 @@ body{
     height: 100%;
 }
 a{
-    color: #44a4cd;
+    color:#7B68EE;
 }
 a:hover{
-    color: #44a8cf;
+    color: rgb(156, 139, 255);
 }
 .shadow{
     box-shadow: 0 8px 12px rgba(0,0,0,0.2), 0 5px 6px rgba(0,0,0,0.4);
 }
 .section-container{
     padding:  30px;
+}
+.card-theme{
+    background-color: #191F26;
+    border: none;
+    border-radius: 12px;
+}
+.card-header-theme{
+    color:#7B68EE; 
+    background-color: #161a1e;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px; 
+    padding:12px; 
+}
+.card-body-theme{
+    background-color:#191f26;
+}
+.card-theme{
+    display: flex;
+    flex-direction: column;
+}
+.section-container{
+    padding: 30px;
 }
