@@ -28,16 +28,16 @@ a:hover{
     border-radius: 12px;
 }
 .card-header-theme{
-    color:#7B68EE; 
+    color:#7B68EE;
     background-color: #161a1e;
     border-top-left-radius: 8px;
-    border-top-right-radius: 8px; 
-    padding:12px; 
+    border-top-right-radius: 8px;
+    padding:12px;
 }
 .card-body-theme{
     background-color:#191f26;
 }
-.card-theme{
+.cards{
     display: flex;
     flex-direction: column;
 }
