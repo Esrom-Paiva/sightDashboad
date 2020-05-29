@@ -1,0 +1,12 @@
+h2{
+  color: #7B68EE;
+}
+
+.table{
+  color: whitesmoke;
+}
+
+tr:hover{
+  background-color: #7B68EE!important;
+  color: whitesmoke!important;
+}
