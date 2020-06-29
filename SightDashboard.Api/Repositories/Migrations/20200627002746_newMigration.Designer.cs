@@ -10,8 +10,8 @@ using Repositories.Context;
 namespace Repositories.Migrations
 {
     [DbContext(typeof(BaseContext))]
-    [Migration("20200603231530_Initial")]
-    partial class Initial
+    [Migration("20200627002746_newMigration")]
+    partial class newMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -35,7 +35,9 @@ namespace Repositories.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("state")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasColumnType("nvarchar(2)")
+                        .HasMaxLength(2);
 
                     b.HasKey("Id");
 
@@ -52,7 +54,7 @@ namespace Repositories.Migrations
                     b.Property<DateTime?>("Completed")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("CustomerId")
+                    b.Property<int?>("CustomerId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("Placed")
@@ -90,9 +92,7 @@ namespace Repositories.Migrations
                 {
                     b.HasOne("Repositories.Models.Customer", "Customer")
                         .WithMany()
-                        .HasForeignKey("CustomerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("CustomerId");
                 });
 #pragma warning restore 612, 618
         }
