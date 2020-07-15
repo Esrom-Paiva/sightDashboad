@@ -38,13 +38,9 @@ namespace WebApi
             services.AddControllers();
             services.AddDbContext<BaseContext>(options => options.UseSqlServer(_connection), ServiceLifetime.Scoped);
             services.AddSingleton(Configuration);
-            services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddTransient<IServerService, ServerService>();
             services.AddTransient<IOrderService, OrderService>();
             services.AddTransient<ICustomerService, CustomerService>();         
-            services.AddTransient<IServerRepository, ServerRepository>();
-            services.AddTransient<IOrderRepository, OrderRepository>();
-            services.AddTransient<ICustomerRepository, CustomerRepository>();
             services.AddTransient<DataSeed>();
         }
         

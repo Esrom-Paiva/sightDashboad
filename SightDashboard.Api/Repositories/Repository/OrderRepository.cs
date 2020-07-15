@@ -1,36 +1,16 @@
 ﻿using Repositories.Context;
 using Repositories.Interface;
-using Repositories.Models;
+using Repositories.Entity;
 using System.Collections.Generic;
 
 namespace Repositories.Repository
 {
-    public class OrderRepository : IOrderRepository
+    public class OrderRepository : BaseRepository<Order>,IOrderRepository
     {
-        private readonly BaseContext _context;
 
-        public OrderRepository(BaseContext baseContext)
+        public OrderRepository(BaseContext Db) : base(Db)
         {
-            _context = baseContext;
-        }
 
-        public IEnumerable<Order> GetAll()
-        {
-            return _context.Orders;
-        }
-        public Order GetById(int Id)
-        {
-            return _context.Orders.Find(Id);
-        }
-        public void Add(Order customer)
-        {
-            _context.Add(customer);
-        }
-
-        public void Delete(int Id)
-        {
-            Order order = _context.Orders.Find(Id);
-            _context.Orders.Remove(order);
         }
     }
 }

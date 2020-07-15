@@ -1,16 +1,13 @@
-﻿using Repositories.Models;
+﻿using Repositories.Entity;
+using Repositories.Repository;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Repositories.Interface
 {
-    public interface ICustomerRepository
+    public interface ICustomerRepository: IBaseRepository<Customer>
     {
-        IEnumerable<Customer> GetAll();
-        Customer GetById(int Id);
-        void Add(Customer customer);
-        void Delete(int Id);
         int Count();
     }
 }

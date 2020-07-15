@@ -1,31 +1,29 @@
 ﻿using Common.Helper;
 using Repositories.Context;
 using Repositories.Interface;
-using Repositories.Models;
+using Repositories.Entity;
 using Repositories.Repository;
 using Services.Interface;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Repositories.UnitOfWork;
 
 namespace Services.Service
 {
     public class OrderService: IOrderService
     {
-        private readonly IOrderRepository _orderRepository;
-        private readonly ICustomerRepository _customerRepository;
-        private readonly IUnitOfWork _unitOfWork;
-        public OrderService(IOrderRepository orderRepository, ICustomerRepository customerRepository, IUnitOfWork unitOfWork)
+        private readonly UnitOfWork _unitOfWork;
+        public OrderService(BaseContext baseContext)
         {
-            _orderRepository = orderRepository;
-            _customerRepository = customerRepository;
-            _unitOfWork = unitOfWork;
+
+            _unitOfWork = new UnitOfWork(baseContext);
         }
 
         public IEnumerable<Order> GetAll()
         {
-            var order = _orderRepository.GetAll().ToList();
+            var order = _unitOfWork.OrderRepository.GetAll();
 
             return order;
         }
@@ -38,7 +36,7 @@ namespace Services.Service
 
                 foreach (var order in orders)
                 {
-                    _orderRepository.Add(order);
+                    _unitOfWork.OrderRepository.Add(order);
                 }
                 _unitOfWork.Commit();
             }
@@ -56,10 +54,10 @@ namespace Services.Service
             {
                 var placed = Helpers.GetRandomOrderPlaced();
                 var Completed = Helpers.GetRandomOrderCompleted(placed);
-                int randCustomerId = rand.Next(1,_customerRepository.Count());
+                int randCustomerId = rand.Next(1, _unitOfWork.CustomerRepository.Count());
                 orders.Add(new Order
                 {
-                    Customer = _customerRepository.GetById(randCustomerId),
+                    Customer = _unitOfWork.CustomerRepository.GetById(c => c.Id == randCustomerId),
                     Total = Helpers.GetRandomOrderTotal(),
                     Placed = placed,
                     Completed = Completed

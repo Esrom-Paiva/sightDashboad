@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Repositories.Models
+namespace Repositories.Entity
 {
     public class Customer
     {

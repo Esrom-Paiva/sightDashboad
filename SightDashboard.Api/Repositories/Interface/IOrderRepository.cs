@@ -1,15 +1,12 @@
-﻿using Repositories.Models;
+﻿using Repositories.Entity;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Repositories.Interface
 {
-    public interface IOrderRepository
+    public interface IOrderRepository: IBaseRepository<Order>
     {
-        IEnumerable<Order> GetAll();
-        Order GetById(int Id);
-        void Add(Order order);
-        void Delete(int Id);
+
     }
 }

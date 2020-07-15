@@ -1,27 +1,26 @@
 ﻿using Repositories.Interface;
-using Repositories.Models;
+using Repositories.Entity;
 using Services.Interface;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-
+using Repositories.UnitOfWork;
+using Repositories.Context;
 
 namespace Services.Service
 {
     public class ServerService: IServerService
     {
-        private readonly IServerRepository _serverRepository;
-        private readonly IUnitOfWork _unitOfWork;
+        private readonly UnitOfWork _unitOfWork;
 
-        public ServerService(IServerRepository serverRepository, IUnitOfWork unitOfWork)
+        public ServerService(BaseContext baseContext)
         {
-            _serverRepository = serverRepository;
-            _unitOfWork = unitOfWork;
+            _unitOfWork = new UnitOfWork(baseContext);
         }
 
         public IEnumerable<Server> GetAll()
         {
-            var servers = _serverRepository.GetAll().ToList();
+            var servers = _unitOfWork.ServerRepository.GetAll();
 
             return servers;
         }
@@ -34,7 +33,7 @@ namespace Services.Service
 
                 foreach (var server in servers)
                 {
-                    _serverRepository.Add(server);
+                    _unitOfWork.ServerRepository.Add(server);
                 }
                 _unitOfWork.Commit();
             }

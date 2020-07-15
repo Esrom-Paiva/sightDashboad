@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using Microsoft.EntityFrameworkCore;
-using Repositories.Models;
+using Repositories.Entity;
 
 namespace Repositories.Context
 {

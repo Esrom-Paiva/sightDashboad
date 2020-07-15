@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Repositories.Models
+namespace Repositories.Entity
 {
     public class Order
     {

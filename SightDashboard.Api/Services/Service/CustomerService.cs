@@ -1,30 +1,28 @@
 ﻿using Common.Helper;
 using Repositories.Context;
 using Repositories.Interface;
-using Repositories.Models;
+using Repositories.Entity;
 using Repositories.Repository;
 using Services.Interface;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Repositories.UnitOfWork;
 
 namespace Services.Service
 {
     public class CustomerService: ICustomerService
     {
-        private readonly ICustomerRepository _customerRepository;
-        private readonly IUnitOfWork _unitOfWork;
-        public CustomerService(ICustomerRepository customerRepository, IUnitOfWork unitOfWork)
+        private readonly UnitOfWork _unitOfWork;
+        public CustomerService(BaseContext baseContext)
         {
-            _customerRepository = customerRepository;
-            _unitOfWork = unitOfWork;
+            _unitOfWork = new UnitOfWork(baseContext);
         }
 
         public IEnumerable<Customer> GetAll()
         {
-            var customers = _customerRepository.GetAll().ToList();
-
+            var customers = _unitOfWork.CustomerRepository.GetAll();
             return customers;
         }
 
@@ -36,7 +34,7 @@ namespace Services.Service
 
                 foreach (var customer in customers)
                 {
-                    _customerRepository.Add(customer);
+                    _unitOfWork.CustomerRepository.Add(customer);
                 }
                 _unitOfWork.Commit();
             }
