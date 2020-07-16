@@ -1,38 +1,28 @@
 ﻿using System.Linq;
-using Services.Interface;
+using Services.Facade;
+
 
 namespace WebApi
 {
     public class DataSeed
     {
-        private IOrderService _orderService;
-        private IServerService _serverService;
-        private ICustomerService _customerService;
+        private IFacade _facade;
 
-        public DataSeed(ICustomerService customerService, IOrderService orderService, IServerService serverService)
+        public DataSeed(IFacade facade)
         {
-            _orderService = orderService;
-            _serverService = serverService;
-            _customerService = customerService;
+            _facade = facade;
         }
         public void SeedData(int nCustomers, int nOrders)
         {
-            var Orders = _orderService.GetAll();
-            var Servers = _serverService.GetAll();
-            var customers = _customerService.GetAll();
 
-            if (!customers.Any())
-            {
-                _customerService.SeedCustomers(nCustomers);
-            }
-            if (!Orders.Any())
-            {
-                _orderService.SeedOrders(nOrders);
-            }
-            if (!Servers.Any())
-            {
-                _serverService.SeedServers();
-            }
+            if (!_facade.GetAllCustomer().Any())
+                _facade.SeedCustomers(nCustomers);
+            
+            if (!_facade.GetAllOrder().Any())
+                _facade.SeedOrders(nOrders);
+
+            if (!_facade.GetAllServer().Any())
+                _facade.SeedServers();
         }
     }
 }

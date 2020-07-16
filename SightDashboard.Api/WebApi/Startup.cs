@@ -16,6 +16,7 @@ using Repositories.Context;
 using Repositories.Interface;
 using Repositories.Repository;
 using Repositories.UnitOfWork;
+using Services.Facade;
 using Services.Interface;
 using Services.Service;
 
@@ -38,10 +39,11 @@ namespace WebApi
             services.AddControllers();
             services.AddDbContext<BaseContext>(options => options.UseSqlServer(_connection), ServiceLifetime.Scoped);
             services.AddSingleton(Configuration);
-            services.AddTransient<IServerService, ServerService>();
-            services.AddTransient<IOrderService, OrderService>();
-            services.AddTransient<ICustomerService, CustomerService>();         
-            services.AddTransient<DataSeed>();
+            services.AddTransient<IFacade, Facade>();
+            services.AddScoped<IOrderService, OrderService>();
+            services.AddScoped<IServerService, ServerService>();
+            services.AddScoped<ICustomerService, CustomerService>();         
+            services.AddScoped<DataSeed>();
         }
         
 
