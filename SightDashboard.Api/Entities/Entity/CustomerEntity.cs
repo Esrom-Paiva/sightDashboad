@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace WebApi.Models
+namespace Entities.Entity
 {
-    public class Server
+    public class CustomerEntity
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public bool IsOnline { get; set; }
+        public string Email { get; set; }
+        public string State { get; set; }
     }
 }

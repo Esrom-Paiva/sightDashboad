@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Repositories.UnitOfWork;
 using Repositories.Context;
+using System.Linq.Expressions;
 
 namespace Services.Service
 {
@@ -18,9 +19,9 @@ namespace Services.Service
             _unitOfWork = new UnitOfWork(baseContext);
         }
 
-        public IEnumerable<Server> GetAll()
+        public IEnumerable<Server> GetAll(Expression<Func<Server, bool>> expression = null)
         {
-            var servers = _unitOfWork.ServerRepository.GetAll();
+            var servers = _unitOfWork.ServerRepository.GetAll(expression);
 
             return servers;
         }
