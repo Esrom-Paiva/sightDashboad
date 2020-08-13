@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.OpenApi.Models;
 using Repositories.Context;
 using Services.AutoMapper;
 using Services.Facade;
@@ -38,6 +39,15 @@ namespace WebApi
             services.AddScoped<IServerService, ServerService>();
             services.AddScoped<ICustomerService, CustomerService>();         
             services.AddScoped<DataSeed>();
+
+            services.AddSwaggerGen(sw => 
+            {
+                sw.SwaggerDoc("v1",new OpenApiInfo
+                { 
+                    Title = "swagger",
+                    Version ="v1"
+                });
+            });
         }
         
 
@@ -52,6 +62,8 @@ namespace WebApi
             var nCustomers = 20;
             seeder.SeedData(nCustomers, nOrders);
 
+            app.UseSwagger();
+
             app.UseHttpsRedirection();
 
             app.UseRouting();
@@ -61,6 +73,10 @@ namespace WebApi
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+            });
+            app.UseSwaggerUI(setup =>
+            {
+                setup.SwaggerEndpoint("v1/swagger.json", "v1");
             });
         }
     }
