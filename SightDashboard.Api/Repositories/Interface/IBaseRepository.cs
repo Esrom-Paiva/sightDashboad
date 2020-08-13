@@ -12,6 +12,8 @@ namespace Repositories.Interface
 
         List<TEntity> GetAll(Expression<Func<TEntity, bool>> expression = null);
 
+        List<TEntity> GetAll(params Expression<Func<TEntity, object>>[] includeExpressions);
+
         void Add(TEntity entity);
 
         void Delete(TEntity entity);

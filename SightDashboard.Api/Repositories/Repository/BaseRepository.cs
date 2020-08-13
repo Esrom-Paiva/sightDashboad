@@ -40,7 +40,19 @@ namespace Repositories.Repository
             }
 
             return query.ToList();
+        } 
+        public virtual List<TEntity> GetAll(params Expression<Func<TEntity, object>>[] includeExpressions)
+        {
+            IQueryable<TEntity> query = _dbSet.AsNoTracking();
+            if (includeExpressions.Count() > 0)
+            {
+                query = includeExpressions.Aggregate(query, (current, expressionInclude) => current.Include(expressionInclude));
+            }
+            return query.ToList();
         }
+
+
+
 
         public virtual TEntity GetById(Expression<Func<TEntity, bool>> expression = null)
         {

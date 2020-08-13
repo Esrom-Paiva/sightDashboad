@@ -1,4 +1,5 @@
-﻿using Repositories.Entity;
+﻿using Entities.Entity;
+using Repositories.Entity;
 using Services.Interface;
 using System;
 using System.Collections.Generic;
@@ -23,7 +24,7 @@ namespace Services.Facade
             _customerService = customerService;
         }
 
-        public IEnumerable<Order> GetAllOrder()
+        public IEnumerable<OrderEntity> GetAllOrder()
         {
            return _orderService.GetAll();
         }

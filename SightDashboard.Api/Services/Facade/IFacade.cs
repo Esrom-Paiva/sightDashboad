@@ -1,4 +1,5 @@
-﻿using Repositories.Entity;
+﻿using Entities.Entity;
+using Repositories.Entity;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -7,7 +8,7 @@ namespace Services.Facade
 {
     public interface IFacade
     {
-        IEnumerable<Order> GetAllOrder();
+        IEnumerable<OrderEntity> GetAllOrder();
 
         void SeedOrders(int nOrders);
 

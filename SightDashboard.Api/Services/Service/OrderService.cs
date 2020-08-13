@@ -1,33 +1,38 @@
 ﻿using Common.Helper;
 using Repositories.Context;
-using Repositories.Interface;
 using Repositories.Entity;
-using Repositories.Repository;
 using Services.Interface;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Repositories.UnitOfWork;
+using System.Linq.Expressions;
+using AutoMapper;
+using Entities.Entity;
 
 namespace Services.Service
 {
     public class OrderService: IOrderService
     {
+        private IMapper _mapper;
+
         private readonly UnitOfWork _unitOfWork;
-        public OrderService(BaseContext baseContext)
+        public OrderService(BaseContext baseContext, IMapper mapper)
         {
+            _mapper = mapper;
 
             _unitOfWork = new UnitOfWork(baseContext);
         }
-
-        public IEnumerable<Order> GetAll()
+        public IEnumerable<OrderEntity> GetAll()
         {
-            var order = _unitOfWork.OrderRepository.GetAll();
-
-            return order;
+            return _mapper.Map<List<Order>, List<OrderEntity>>(_unitOfWork.OrderRepository.GetAll());
         }
 
+        public IEnumerable<OrderEntity> GetAll(params Expression<Func<Order, object>>[] includeExpressions)
+        {
+            return _mapper.Map<List<Order>, List<OrderEntity>>(_unitOfWork.OrderRepository.GetAll(includeExpressions));
+
+        }
+        
         public void SeedOrders(int nOrders)
         {
             try
