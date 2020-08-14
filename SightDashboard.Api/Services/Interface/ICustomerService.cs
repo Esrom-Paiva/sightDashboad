@@ -8,9 +8,9 @@ namespace Services.Interface
 {
     public interface ICustomerService
     {
-        IEnumerable<Customer> GetAll(Expression<Func<Customer, bool>> expression = null);
+        IEnumerable<CustomerEntity> GetAll(Expression<Func<Customer, bool>> expression = null);
 
-        Customer GetById(Expression<Func<Customer, bool>> expression = null);
+        CustomerEntity GetById(Expression<Func<Customer, bool>> expression = null);
 
         void Save(CustomerEntity entity);
 

@@ -12,11 +12,11 @@ namespace Services.Facade
 
         void SeedOrders(int nOrders);
 
-        IEnumerable<Customer> GetAllCustomer();
+        IEnumerable<CustomerEntity> GetAllCustomer();
 
         void SeedCustomers(int nCustomers);
 
-        IEnumerable<Server> GetAllServer();
+        IEnumerable<ServerEntity> GetAllServer();
 
         void SeedServers();
 

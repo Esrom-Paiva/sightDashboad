@@ -8,8 +8,11 @@ namespace Services.Interface
 {
     public interface IOrderService
     {
+        OrderEntity GetById(Expression<Func<Order, bool>> expression = null);
         IEnumerable<OrderEntity> GetAll();
+
         IEnumerable<OrderEntity> GetAll(params Expression<Func<Order, object>>[] includeExpressions);
+
         void SeedOrders(int nOrders);
     }
 }

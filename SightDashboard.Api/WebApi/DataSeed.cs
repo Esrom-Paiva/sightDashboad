@@ -12,7 +12,13 @@ namespace WebApi
         {
             _facade = facade;
         }
-        public void SeedData(int nCustomers, int nOrders)
+        public void CallSeedData()
+        {
+            SeedData(20, 1000);
+        }
+
+
+        private void SeedData(int nCustomers, int nOrders)
         {
 
             if (!_facade.GetAllCustomer().Any())

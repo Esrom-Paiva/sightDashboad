@@ -20,9 +20,14 @@ namespace WebApi.Controllers
             _orderService = orderService;
         }
 
+        [HttpPost("{id}")]
+        public IActionResult GetById(int id)
+        {
+            return Ok(_orderService.GetById(o => o.Id == id));
+        }
 
         [HttpGet("{pageIndex:int}/{pageSize:int}")]
-        public IActionResult Get(int pageIndex, int pageSize)
+        public IActionResult GetPaginated(int pageIndex, int pageSize)
         {
 
             var data = _orderService.GetAll(o => o.Customer);

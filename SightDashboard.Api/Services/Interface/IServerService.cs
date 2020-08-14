@@ -1,4 +1,5 @@
-﻿using Repositories.Entity;
+﻿using Entities.Entity;
+using Repositories.Entity;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -8,7 +9,7 @@ namespace Services.Interface
 {
     public interface IServerService
     {
-        IEnumerable<Server> GetAll(Expression<Func<Server, bool>> expression = null);
+        IEnumerable<ServerEntity> GetAll(Expression<Func<Server, bool>> expression = null);
         public void SeedServers();
     }
 }

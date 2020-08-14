@@ -25,9 +25,9 @@ namespace Services.Service
             _unitOfWork = new UnitOfWork(baseContext);
         }
 
-        public Customer GetById(Expression<Func<Customer, bool>> expression = null)
+        public CustomerEntity GetById(Expression<Func<Customer, bool>> expression = null)
         {
-            return _unitOfWork.CustomerRepository.GetById(expression);
+            return _mapper.Map<Customer, CustomerEntity>(_unitOfWork.CustomerRepository.Get(expression));
         }
 
         public void Save(CustomerEntity entity)
@@ -44,9 +44,9 @@ namespace Services.Service
             }
         }
 
-        public IEnumerable<Customer> GetAll(Expression<Func<Customer, bool>> expression = null)
+        public IEnumerable<CustomerEntity> GetAll(Expression<Func<Customer, bool>> expression = null)
         {
-            return _unitOfWork.CustomerRepository.GetAll(expression);
+            return _mapper.Map<List<Customer>, List<CustomerEntity>>(_unitOfWork.CustomerRepository.GetAll(expression));
         }
 
         public void SeedCustomers(int nCustomers)

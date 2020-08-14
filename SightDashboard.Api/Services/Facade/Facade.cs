@@ -34,7 +34,7 @@ namespace Services.Facade
             _orderService.SeedOrders(nOrders);
         }
 
-        public IEnumerable<Customer> GetAllCustomer()
+        public IEnumerable<CustomerEntity> GetAllCustomer()
         {
             return _customerService.GetAll();
         }
@@ -44,7 +44,7 @@ namespace Services.Facade
             _customerService.SeedCustomers(nCustomers);
         }
 
-        public IEnumerable<Server> GetAllServer()
+        public IEnumerable<ServerEntity> GetAllServer()
         {
             return _serverService.GetAll();
         }

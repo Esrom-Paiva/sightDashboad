@@ -58,9 +58,6 @@ namespace WebApi
             {
                 app.UseDeveloperExceptionPage();
             }
-            var nOrders = 1000;
-            var nCustomers = 20;
-            seeder.SeedData(nCustomers, nOrders);
 
             app.UseSwagger();
 
@@ -78,6 +75,8 @@ namespace WebApi
             {
                 setup.SwaggerEndpoint("v1/swagger.json", "v1");
             });
+
+            seeder.CallSeedData();
         }
     }
 }

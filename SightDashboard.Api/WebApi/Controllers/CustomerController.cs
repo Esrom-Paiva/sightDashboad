@@ -16,8 +16,7 @@ namespace WebApi.Controllers
         {
             _customerService = customerService;
         }
-
-        [HttpGet]
+        [HttpGet()]
         public IActionResult Get()
         {
             return Ok(_customerService.GetAll());

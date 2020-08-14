@@ -7,23 +7,26 @@ using System.Linq;
 using Repositories.UnitOfWork;
 using Repositories.Context;
 using System.Linq.Expressions;
+using Entities.Entity;
+using AutoMapper;
 
 namespace Services.Service
 {
     public class ServerService: IServerService
     {
+        private IMapper _mapper;
+
         private readonly UnitOfWork _unitOfWork;
 
-        public ServerService(BaseContext baseContext)
+        public ServerService(BaseContext baseContext, IMapper mapper)
         {
             _unitOfWork = new UnitOfWork(baseContext);
+            _mapper = mapper;
         }
 
-        public IEnumerable<Server> GetAll(Expression<Func<Server, bool>> expression = null)
+        public IEnumerable<ServerEntity> GetAll(Expression<Func<Server, bool>> expression = null)
         {
-            var servers = _unitOfWork.ServerRepository.GetAll(expression);
-
-            return servers;
+            return _mapper.Map<List<Server>, List<ServerEntity>>(_unitOfWork.ServerRepository.GetAll(expression));
         }
 
         public void SeedServers()

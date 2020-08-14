@@ -22,6 +22,12 @@ namespace Services.Service
 
             _unitOfWork = new UnitOfWork(baseContext);
         }
+
+        public OrderEntity GetById(Expression<Func<Order, bool>> expression = null)
+        {
+           return _mapper.Map<Order, OrderEntity>(_unitOfWork.OrderRepository.Get(expression));
+        }
+
         public IEnumerable<OrderEntity> GetAll()
         {
             return _mapper.Map<List<Order>, List<OrderEntity>>(_unitOfWork.OrderRepository.GetAll());
@@ -62,7 +68,7 @@ namespace Services.Service
                 int randCustomerId = rand.Next(1, _unitOfWork.CustomerRepository.Count());
                 orders.Add(new Order
                 {
-                    Customer = _unitOfWork.CustomerRepository.GetById(c => c.Id == randCustomerId),
+                    Customer = _unitOfWork.CustomerRepository.Get(c => c.Id == randCustomerId),
                     Total = Helpers.GetRandomOrderTotal(),
                     Placed = placed,
                     Completed = Completed
