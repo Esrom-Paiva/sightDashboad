@@ -9,7 +9,12 @@ namespace Services.Interface
 {
     public interface IServerService
     {
+        ServerEntity GetById(Expression<Func<Server, bool>> expression = null);
+
+        ServerEntity Put(int id, bool isActivate);
+
         IEnumerable<ServerEntity> GetAll(Expression<Func<Server, bool>> expression = null);
+
         public void SeedServers();
     }
 }

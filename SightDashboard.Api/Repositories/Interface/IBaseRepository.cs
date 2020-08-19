@@ -20,6 +20,8 @@ namespace Repositories.Interface
 
         void Add(TEntity entity);
 
+        void Put(TEntity entity);
+
         void Delete(TEntity entity);
 
 

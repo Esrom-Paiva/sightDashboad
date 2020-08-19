@@ -40,6 +40,10 @@ namespace WebApi
             services.AddScoped<ICustomerService, CustomerService>();         
             services.AddScoped<DataSeed>();
 
+            services.AddCors(opt => {
+                opt.AddPolicy("CorsPolicy",
+                    c => c.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
+            });
             services.AddSwaggerGen(sw => 
             {
                 sw.SwaggerDoc("v1",new OpenApiInfo
@@ -57,6 +61,7 @@ namespace WebApi
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseCors("CorsPolicy");
             }
 
             app.UseSwagger();

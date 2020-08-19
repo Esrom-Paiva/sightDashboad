@@ -27,6 +27,11 @@ namespace Repositories.Repository
             _context.Entry(entity).State = EntityState.Added;
         }
 
+        public virtual void Put(TEntity entity)
+        {
+            _context.Entry(entity).State = EntityState.Modified;
+        }
+
         public virtual void Delete(TEntity entity)
         {
             _context.Entry(entity).State = EntityState.Deleted;

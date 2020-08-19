@@ -23,10 +23,34 @@ namespace Services.Service
             _unitOfWork = new UnitOfWork(baseContext);
             _mapper = mapper;
         }
+        public ServerEntity GetById(Expression<Func<Server, bool>> expression = null)
+        {
+            return _mapper.Map<Server, ServerEntity>(_unitOfWork.ServerRepository.Get(expression));
+        }
 
         public IEnumerable<ServerEntity> GetAll(Expression<Func<Server, bool>> expression = null)
         {
             return _mapper.Map<List<Server>, List<ServerEntity>>(_unitOfWork.ServerRepository.GetAll(expression));
+        }
+
+        public ServerEntity Put(int id, bool isActivate)
+        {
+            var server = _unitOfWork.ServerRepository.Get(s => s.Id == id);
+
+            if (server is null)
+            {
+                return null;
+            }
+            else 
+            {
+                server.IsOnline = isActivate;
+
+                _unitOfWork.ServerRepository.Put(server);
+
+                _unitOfWork.Commit();
+
+                return _mapper.Map<Server,ServerEntity>(server);
+            }
         }
 
         public void SeedServers()
