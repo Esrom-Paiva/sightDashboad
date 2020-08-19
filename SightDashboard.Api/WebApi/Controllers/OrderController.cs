@@ -14,16 +14,18 @@ namespace WebApi.Controllers
     public class OrderController : ControllerBase
     {
         private IOrderService _orderService;
+        private ICustomerService _customerService;
 
-        public OrderController(IOrderService orderService)
+        public OrderController(IOrderService orderService, ICustomerService customerService)
         {
             _orderService = orderService;
+            _customerService = customerService;
         }
 
-        [HttpPost("{id}")]
+        [HttpGet("{id}")]
         public IActionResult GetById(int id)
         {
-            return Ok(_orderService.GetById(o => o.Id == id));
+            return Ok(_orderService.GetById(o => o.Id == id, o => o.Customer));
         }
 
         [HttpGet("{pageIndex:int}/{pageSize:int}")]
@@ -39,8 +41,8 @@ namespace WebApi.Controllers
             });
         }
 
-        [HttpGet("byState")]
-        public IActionResult getByState()
+        [HttpGet("ByState")]
+        public IActionResult GetByState()
         {
             var data = _orderService.GetAll(o => o.Customer).GroupBy(o => o.Customer.State).ToList();
 
@@ -51,6 +53,24 @@ namespace WebApi.Controllers
                         Total = Convert.ToDouble(grp.Sum(x => x.Total))
                     })
                     .OrderByDescending(res => res.Total);
+
+            return Ok(groupedResult);
+        }
+
+        [HttpGet("ByCustomer/{nCustomer}")]
+        public IActionResult GetByCustomer(int nCustomer)
+        {
+            var data = _orderService.GetAll(o => o.Customer).GroupBy(o => o.Customer.Id).ToList();
+
+            var groupedResult = data
+                    .Select(grp => new ResultApi()
+                    {
+                        Data = _customerService.GetById(c => c.Id == grp.Key).Name,
+                        Total = Convert.ToDouble(grp.Sum(x => x.Total))
+                    })
+                    .OrderByDescending(res => res.Total)
+                    .Take(nCustomer);
+
             return Ok(groupedResult);
         }
     }

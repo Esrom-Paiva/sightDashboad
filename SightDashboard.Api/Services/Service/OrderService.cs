@@ -23,9 +23,9 @@ namespace Services.Service
             _unitOfWork = new UnitOfWork(baseContext);
         }
 
-        public OrderEntity GetById(Expression<Func<Order, bool>> expression = null)
+        public OrderEntity GetById(Expression<Func<Order, bool>> expression = null, params Expression<Func<Order, object>>[] includeExpressions)
         {
-           return _mapper.Map<Order, OrderEntity>(_unitOfWork.OrderRepository.Get(expression));
+           return _mapper.Map<Order, OrderEntity>(_unitOfWork.OrderRepository.Get(expression, includeExpressions));
         }
 
         public IEnumerable<OrderEntity> GetAll()
@@ -36,7 +36,6 @@ namespace Services.Service
         public IEnumerable<OrderEntity> GetAll(params Expression<Func<Order, object>>[] includeExpressions)
         {
             return _mapper.Map<List<Order>, List<OrderEntity>>(_unitOfWork.OrderRepository.GetAll(includeExpressions));
-
         }
         
         public void SeedOrders(int nOrders)
