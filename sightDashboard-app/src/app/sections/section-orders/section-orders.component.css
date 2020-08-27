@@ -10,3 +10,7 @@ tr:hover{
   background-color: #7B68EE!important;
   color: whitesmoke!important;
 }
+
+.btn-pagination{
+  text-align: right;
+}
