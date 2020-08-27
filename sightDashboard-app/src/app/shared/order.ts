@@ -3,7 +3,7 @@ import { Customer } from './customer';
 export interface Order{
   id: number;
   customer: Customer;
-  amount: number;
+  total: number;
   placed: Date;
-  fulfilled: Date;
+  completed: Date;
 }

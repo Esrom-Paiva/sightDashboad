@@ -13,9 +13,9 @@
       <tr *ngFor="let order of orders">
         <td>{{ order.id }}</td>
         <td>{{ order.customer.name }}</td>
-        <td>{{ order.amount }}</td>
+        <td>{{ order.total }}</td>
         <td>{{ order.placed | date:'dd/MM/yyyy - hh:mm a' }}</td>
-        <td>{{ order.fulfilled | date: 'dd/MM/yyyy - hh:mm a' }}</td>
+        <td>{{ order.completed | date: 'dd/MM/yyyy - hh:mm a' }}</td>
         <td>Status</td>
       </tr>
     </tbody>
