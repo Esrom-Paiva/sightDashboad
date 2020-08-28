@@ -14,7 +14,7 @@ namespace Common
         public PaginatedResponse(IEnumerable<T> data, int index, int len)
         {
             Data = data.Skip((index - 1) * len).Take(len).ToList();
-            Total = Data.Count();
+            Total = data.Count();
         }
     }
 }
