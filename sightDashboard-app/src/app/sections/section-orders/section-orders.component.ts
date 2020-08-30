@@ -10,26 +10,9 @@ import { SalesDataService } from '../../services/sales-data.service';
 })
 export class SectionOrdersComponent implements OnInit {
 
-  constructor( private _salesData: SalesDataService) { }
-  // orders: Order[] = [
-  //   {id: 1, customer:
-  //     {id: 1, name: 'Main St Bakery', state: 'CO',  email: 'Test@gmail.com'},
-  //     amount: 230, placed: new Date(2020, 5, 28), fulfilled: new Date(2020, 5, 28)},
-  //   {id: 2, customer:
-  //     {id: 2, name: 'Main St Bakery', state: 'CO',  email: 'Test@gmail.com'},
-  //     amount: 230, placed: new Date(2020, 5, 28), fulfilled: new Date(2020, 5, 28)},
-  //   {id: 3, customer:
-  //     {id: 3, name: 'Main St Bakery', state: 'CO',  email: 'Test@gmail.com'},
-  //     amount: 230, placed: new Date(2020, 5, 28), fulfilled: new Date(2020, 5, 28)},
-  //   {id: 4, customer:
-  //     {id: 4, name: 'Main St Bakery', state: 'CO',  email: 'Test@gmail.com'},
-  //     amount: 230, placed: new Date(2020, 5, 28), fulfilled: new Date(2020, 5, 28)},
-  //   {id: 5, customer:
-  //     {id: 5, name: 'Main St Bakery', state: 'CO',  email: 'Test@gmail.com'},
-  //     amount: 230, placed: new Date(2020, 5, 28), fulfilled: new Date(2020, 5, 28)},
-  // ];
+  constructor( private salesData: SalesDataService) { }
   orders: Order[];
-  total = 0;
+  totalOrders: number;
   page = 1;
   limit = 10;
   loading = false;
@@ -39,17 +22,19 @@ export class SectionOrdersComponent implements OnInit {
   }
 
   getOrders(): void {
-    this._salesData.getOrders(this.page, this.limit)
+    this.salesData.getOrders(this.page, this.limit)
       .subscribe(res => {
-        console.log('Result from getOrders: ', res.total, res.data);
+        console.log('Result from getOrders: ', res.data.total);
         this.orders = res.data.data;
-        this.total = res.data.total;
+        this.totalOrders = res.data.total;
         this.loading = false;
       });
   }
   goToPrevious(): void {
-    this.page--;
-    this.getOrders();
+    if (this.page > 1){
+      this.page--;
+      this.getOrders();
+    }
   }
   goToNext(): void {
     this.page++;

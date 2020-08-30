@@ -11,3 +11,7 @@
 .btn-paginated button:hover{
   background-color: #593feb;
 }
+
+.per-page{
+  width:35px;
+}

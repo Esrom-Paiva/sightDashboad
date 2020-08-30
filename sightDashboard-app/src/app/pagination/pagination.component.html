@@ -1,12 +1,21 @@
 <div>
   <div class="pages">
-    <span class="page-counts"> x throungh y of z orders</span>
-    <span class="page-total"> {{ totalPages()}} Total Pages</span>
-    <b>...</b>
+    <span class="page-counts">{{ getMin() }} throungh {{ getMax() }} of {{ count }} orders</span>
+    <span class="page-total"> / Total Pages {{ totalPages()}}</span>
   </div>
-  <div class = "btn-paginated">
+  <div class = "btn-paginated" *ngIf="count > 0">
     <button (click)="onPrev()">Previous</button>
-      <button (click)="onNext()">Go Next</button>
+
+    <button class="per-page"
+      *ngFor="let pageNum of getPages()"
+        (click)="onPage(pageNum)"
+        [ngClass] = "{'active': pageNum === page, 'disabled': loading}">
+        {{ pageNum }}
+      </button>
+
+    <button (click)="onNext()"
+    [disabled]="isLastPage() || loading"
+    [ngClass]="{ 'disabled': isLastPage() || loading }">Go Next</button>
   </div>
 </div>
 
