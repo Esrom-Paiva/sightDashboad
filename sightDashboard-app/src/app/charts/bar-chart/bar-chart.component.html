@@ -1,9 +1,10 @@
 <div class="chart">
     <canvas baseChart
+    *ngIf='barChartData && barChartData.length > 0'
         [datasets]="barChartData"
         [labels]="barChartLabels"
         [options]="barChatsOptions"
         [legend]="barChatsLegend"
         [chartType]="barChartType">
-    </canvas>       
+    </canvas>
 </div>
