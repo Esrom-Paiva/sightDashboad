@@ -125,6 +125,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "sightDashboard-app"
+    }
+  },
+  "defaultProject": "sightDashboard-app",
+  "cli": {
+    "analytics": "81da5a5e-37b4-4faa-8cd0-485cfad3f233"
+  }
 }
