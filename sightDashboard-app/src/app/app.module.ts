@@ -18,6 +18,7 @@ import { PieChartComponent } from './charts/pie-chart/pie-chart.component';
 import { ServerComponent } from './server/server.component';
 
 import { SalesDataService } from './services/sales-data.service';
+import { ServerService } from './services/server.service';
 import { PaginationComponent } from './pagination/pagination.component';
 
 
@@ -43,7 +44,8 @@ import { PaginationComponent } from './pagination/pagination.component';
     HttpClientModule
   ],
   providers: [
-    SalesDataService
+    SalesDataService,
+    ServerService
   ],
   bootstrap: [AppComponent]
 })
