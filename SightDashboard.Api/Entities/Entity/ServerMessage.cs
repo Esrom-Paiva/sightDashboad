@@ -8,6 +8,6 @@ namespace Entities.Entity
     {
         public int Id { get; set; }
 
-        public string Payload { get; set; }
+        public bool Payload { get; set; }
     }
 }

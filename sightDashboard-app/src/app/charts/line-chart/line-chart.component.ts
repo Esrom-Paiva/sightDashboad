@@ -40,13 +40,12 @@ export class LineChartComponent implements OnInit {
             ret.push(index.map( i => new Date(i[0])));
             return ret;
           });
-          dates =[].concat.apply([],dates);
-          
+          dates = [].concat.apply([], dates);
+
           const CustomerOrdersByDate = this.getCustomerOrdersByDate(allChartData, dates)['data'];
-          console.log('CustomerOrdersByDate', CustomerOrdersByDate);
-  
+
           this.lineChartLabels = CustomerOrdersByDate[0]['orders'].map(o => o['date']);
-          
+
           this.lineChartData = [
             {'data': CustomerOrdersByDate[0].orders.map(x => x.total),'label': CustomerOrdersByDate[0].customer},
             {'data': CustomerOrdersByDate[1].orders.map(x => x.total),'label': CustomerOrdersByDate[1].customer},
@@ -77,17 +76,17 @@ export class LineChartComponent implements OnInit {
     customers.reduce((acc, cur, index) => {
       const customerOrders = [];
       dataSet[index] = {
-        customer: cur, orders: 
-        date.reduce((ac, cc, i) =>{
+        customer: cur, orders:
+        date.reduce((ac, cc, i) => {
           const obj = {};
           obj['date'] = cc;
           obj['total'] = this.getCustomerDateTotal(cur, cc);
           customerOrders.push(obj);
           return customerOrders;
         })
-      }      
-      
-      return acc
+      };
+
+      return acc;
     }, []);
 
     return result;
@@ -100,7 +99,7 @@ export class LineChartComponent implements OnInit {
 
     const result = dateTotal.reduce((acc, cur) => {
       return acc + cur.total;
-    },0);  
+    }, 0);
     return result;
   }
 

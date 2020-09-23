@@ -11,7 +11,7 @@ namespace Services.Interface
     {
         ServerEntity GetById(Expression<Func<Server, bool>> expression = null);
 
-        ServerEntity Put(int id, bool isActivate);
+        ServerEntity Put(int id, ServerMessage message);
 
         IEnumerable<ServerEntity> GetAll(Expression<Func<Server, bool>> expression = null);
 

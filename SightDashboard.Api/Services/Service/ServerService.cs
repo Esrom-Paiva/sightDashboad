@@ -33,7 +33,7 @@ namespace Services.Service
             return _mapper.Map<List<Server>, List<ServerEntity>>(_unitOfWork.ServerRepository.GetAll(expression));
         }
 
-        public ServerEntity Put(int id, bool isActivate)
+        public ServerEntity Put(int id, ServerMessage message)
         {
             var server = _unitOfWork.ServerRepository.Get(s => s.Id == id);
 
@@ -43,7 +43,7 @@ namespace Services.Service
             }
             else 
             {
-                server.IsOnline = isActivate;
+                server.IsOnline = message.Payload;
 
                 _unitOfWork.ServerRepository.Put(server);
 

@@ -27,9 +27,9 @@ namespace WebApi.Controllers
         }
 
         [HttpPut("{id}", Name = "GetServer")]
-        public IActionResult Message(int id, [FromBody] ServerMessage msg)
+        public IActionResult Message(int id, [FromBody] ServerMessage message)
         {
-            var serverUpdated = _serverService.Put(id, msg.Payload.ToUpper() == "ACTIVATE"? true: false);
+            var serverUpdated = _serverService.Put(id, message);
             if (serverUpdated is null)
             {
                 return NotFound();
